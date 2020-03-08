@@ -52,4 +52,33 @@ Pick three.
 
         assert_eq!(vec!["safe, fast, productive"], search(query, contents));
     }
+
+
+    #[test]
+    fn n_results() {
+        let query = "duct";
+        let contents = "\
+Rust: 
+safe, fast, productive
+better than duct tape
+Pick three.
+";
+
+        assert_eq!(
+            vec!["safe, fast, productive", "better than duct tape"],
+            search(query, contents));
+    }
+
+    #[test]
+    fn no_result() {
+        let query = "virus";
+        let empty_vec: Vec<&str> = Vec::new();
+        let contents = "\
+Rust: 
+safe, fast, productive
+Pick three.
+";
+
+        assert_eq!(empty_vec, search(query, contents));
+    }
 }
